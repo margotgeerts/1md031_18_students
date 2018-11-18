@@ -1,9 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>DELI-VERY</title>
+      <link rel="stylesheet" type="text/css" href="css/style.css">
+      <script type="text/javascript" src="js/menu.js"></script>
+      <script src="js/js_script.js" defer></script>
+      <script src="https://vuejs.org/js/vue.js"></script>
+      <script src="js/vue_script.js" defer></script>
+      <title>5 burgers</title>
+      <meta charset="utf-8"/>
+      <link rel="stylesheet" href="css/deli-very.css">
+      <script src="/vue/vue.js" defer></script>
+      <script src="/socket.io/socket.io.js" defer></script>
+      <script src="js/deli-very.js" defer></script>
     </head>
     <body>
-        <h1>Hello World!!!</h1>
+      <div id="vue-container">
+      <div id="head"><h1>Welcome to BurgerHeaven Online</h1>
+      <img src="http://demo.select-themes.com/nouveau/wp-content/uploads/2014/04/title_black_and_white_03.jpg"></div>
+      <section id="burger">
+        <h2>Select burger</h2>
+        This is where you execute burger selection
+
+
+        <div style="display: flex; justify-content:space-evenly; wrap:wrap;">
+          <div v-for="burger in food" >
+            <p id='burgername'> {{ burger.name }} </p>
+            <img v-bind:src="burger.img" width="250" height="200" alt="Span">
+            <p><li>{{burger.kCal}} kCal</li>
+            <li v-if=burger.gluten>Contains <span class="ingredients">gluten</span></li>
+            <li v-if=burger.lactose>Contains <span class="ingredients">lactose</span></li></p>
+            <p>Add to order <input v-model="burgerdetails.chosenburger" :id="burger.name" name="chosenBurger" type='checkbox' :value="burger.name"></p>
+          </div>
+       </div>
+
+      </section>
+      <section id="info">
+        <h2>Customer information</h2>
+        This is where you provide necessary information
+        <p><h3>Delivery information:</h3></p>
+        <form>
+          <p>
+            <label for="name">Full name</label><br>
+            <input v-model="burgerdetails.name" type="text" id="name" name="n" required="required" placeholder="First- and Last name">
+          </p>
+          <p>
+            <label for="email">E-mail</label><br>
+            <input v-model="burgerdetails.email" type="email" id="email" name="em" required ="required" placeholder="E-mail address">
+          </p>
+          <p>
+            <label for="payment">Payment options</label><br>
+            <select v-model='burgerdetails.payment' id="payment" name="pm">
+              <option selected="selected">Credit Card</option>
+              <option>Debit Card</option>
+              <option>Cash</option>
+              <option>Voucher</option>
+            </select>
+          </p>
+          <p>
+            <label for="gender">Gender</label><br>
+            <input v-model="burgerdetails.gender" type="radio" id="gender" name="gender" value="Male"> Male<br>
+            <input v-model="burgerdetails.gender" type="radio" id="gender" name="gender" value="Female"> Female<br>
+            <input v-model="burgerdetails.gender" type="radio" id="gender" name="gender" value="Non-binary"> Non-binary<br>
+            <input v-model="burgerdetails.gender" type="radio" id="gender" name="gender" value="Undisclosed" checked="checked"> Undisclosed
+          </p>
+        </form>
+        <h1> Click in the map! </h1>
+        <a href="/dispatcher" target="_blank">Open dispatcher in new window</a>.
+        <div class="view-box">
+          <div id="dots" v-on:click="addOrder">
+              <div
+                v-for="(order, key) in orders"
+                v-bind:style="{ left: order.details.x + 'px', top: order.details.y + 'px'}">
+                {{key}}
+              </div>
+          </div>
+        </div>
+      </section>
+      <p>
+        <button id="myButtonID" v-on:click="markDone()" type="submit"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY8RExxEF1YdoPI8dk3o7pD7sN4RYSODafSIxbj86g_DI1rZxY" width=20> Place my order!</button>
+      </p>
+      <div class='conf' v-if='show'><p id='orderconf'>Order Confirmation</p>
+      <p id='custdetails'>Customer details</p>
+      <p>Name: {{burgerdetails.name}}</p>
+      <p>Email: {{burgerdetails.email}}</p>
+      <p>Deliver to:</p>
+      <p>Payment method: {{burgerdetails.payment}}</p>
+      <p>Gender: {{burgerdetails.gender}}</p>
+      <p id='custdetails'>Order summary</p>
+      <div v-for="b in burgerdetails.chosenburger"><li>{{b}}</li></div></div>
+      <footer>
+        <hr> &copy; 2018 Hypothetical Burgers Inc. </hr>
+      </footer>
+    </div>
     </body>
 </html>
