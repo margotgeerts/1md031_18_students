@@ -5,7 +5,7 @@
       <script type="text/javascript" src="js/menu.js"></script>
       <script src="js/js_script.js" defer></script>
       <script src="https://vuejs.org/js/vue.js"></script>
-      <script src="js/vue_script.js" defer></script>
+      <!-- <script src="js/vue_script.js" defer></script> -->
       <title>5 burgers</title>
       <meta charset="utf-8"/>
       <link rel="stylesheet" href="css/deli-very.css">
@@ -64,20 +64,18 @@
             <input v-model="burgerdetails.gender" type="radio" id="gender" name="gender" value="Undisclosed" checked="checked"> Undisclosed
           </p>
         </form>
-        <h1> Click in the map! </h1>
-        <a href="/dispatcher" target="_blank">Open dispatcher in new window</a>.
+        <p>Please indicate point of delivery: </p>
         <div class="view-box">
-          <div id="dots" v-on:click="addOrder">
+          <div id="dots" v-on:click="displayOrder">
               <div
-                v-for="(order, key) in orders"
-                v-bind:style="{ left: order.details.x + 'px', top: order.details.y + 'px'}">
-                {{key}}
+                v-bind:style="{ left: x + 'px', top: y + 'px'}">
+                T
               </div>
           </div>
         </div>
       </section>
       <p>
-        <button id="myButtonID" v-on:click="markDone()" type="submit"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY8RExxEF1YdoPI8dk3o7pD7sN4RYSODafSIxbj86g_DI1rZxY" width=20> Place my order!</button>
+        <button id="myButtonID" v-on:click="addOrder" type="submit"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY8RExxEF1YdoPI8dk3o7pD7sN4RYSODafSIxbj86g_DI1rZxY" width=20> Place my order!</button>
       </p>
       <div class='conf' v-if='show'><p id='orderconf'>Order Confirmation</p>
       <p id='custdetails'>Customer details</p>
