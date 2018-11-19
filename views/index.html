@@ -22,7 +22,7 @@
         This is where you execute burger selection
 
 
-        <div style="display: flex; justify-content:space-evenly; wrap:wrap;">
+        <div style="display: flex; justify-content:space-evenly; wrap:wrap; flex-wrap:wrap">
           <div v-for="burger in food" >
             <p id='burgername'> {{ burger.name }} </p>
             <img v-bind:src="burger.img" width="250" height="200" alt="Span">

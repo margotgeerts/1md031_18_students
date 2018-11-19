@@ -1,0 +1,62 @@
+body {
+    font-family: "Times New Roman"; font-size: 117%;
+}
+.ingredients {
+    font-weight: bold ;
+}
+#burger {
+  color: white; background-color: black; border: 2px dashed white;
+}
+
+#info {
+  border: 2px dashed black;
+}
+
+button:hover {
+    background-color: green; cursor: pointer;
+}
+
+section {
+    margin-left: 10px; margin-top: 5px;padding-left:10px;
+}
+
+button {
+    margin-top: 10px; margin-left: 10px;
+}
+#head {
+  margin-left: 10px; height: 250px; overflow:hidden;
+}
+#head img {
+  opacity: 0.7; width: 100%; height: auto;
+}
+#head h1 {
+  position: absolute; padding-left: 400px; padding-top: 60px;
+}
+
+.wrapper {
+     display: grid;
+     grid-template-columns: 330px 330px 330px;
+ }
+
+ .box {
+     border-radius: 5px;
+     padding: 10px;
+ }
+
+ .a {
+     grid-column: 1 ;
+ }
+ .b {
+     grid-column: 2 ;
+ }
+ .c {
+     grid-column: 3 ;
+ }
+
+ #burgername {
+   text-align: left; font-weight: bold; font-size: 15pt; padding-left:50px;
+ }
+
+.conf {padding-left: 10px}
+#orderconf{font-size: 15pt; font-weight:bold; padding-bottom: 5px}
+#custdetails{font-weight: bold; padding-bottom: 5px}
