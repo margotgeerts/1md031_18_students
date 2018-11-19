@@ -60,14 +60,16 @@ var vm = new Vue({
       return lastOrder + 1;
     },
     addOrder: function () {
-      console.log('new order')
+      console.log('new order');
       // var offset = {x: event.currentTarget.getBoundingClientRect().left,
       //               y: event.currentTarget.getBoundingClientRect().top};
+      this.markDone();
       socket.emit("addOrder", { orderId: this.getNext(),
                                 // details: { x: event.clientX - 10 - offset.x,
                                 //            y: event.clientY- 10 - offset.y },
                                 details: {x:this.x, y:this.y},
-                                orderItems: this.burgerdetails.chosenburger
+                                orderItems: this.burgerdetails.chosenburger,
+                                personalInfo: [this.burgerdetails.name, this.burgerdetails.email, this.burgerdetails.payment, this.burgerdetails.gender],
                               });
     },
     displayOrder: function (event){
