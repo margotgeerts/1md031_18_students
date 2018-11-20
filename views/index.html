@@ -39,6 +39,12 @@
         This is where you provide necessary information
         <p><h3>Delivery information:</h3></p>
         <form>
+          <p v-if="errors.length">
+            <b>Please correct the following error(s):</b>
+            <ul>
+              <li v-for="error in errors">{{ error }}</li>
+            </ul>
+          </p>
           <p>
             <label for="name">Full name</label><br>
             <input v-model="burgerdetails.name" type="text" id="name" name="n" required="required" placeholder="First- and Last name">

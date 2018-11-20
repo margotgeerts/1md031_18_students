@@ -38,6 +38,7 @@ var vm = new Vue({
     orders: {},
     x:0,
     y:0,
+    errors: [],
   },
   created: function () {
     socket.on('initialize', function (data) {
@@ -62,6 +63,7 @@ var vm = new Vue({
     addOrder: function () {
       console.log('new order');
       this.markDone();
+      this.checkForm(event);
       socket.emit("addOrder", { orderId: this.getNext(),
                                 details: {x:this.x, y:this.y},
                                 orderItems: this.burgerdetails.chosenburger,
@@ -75,5 +77,27 @@ var vm = new Vue({
       this.x= event.clientX-10 - offset.x
       this.y= event.clientY-10 - offset.y
     },
+    checkForm: function (e) {
+      if (this.burgerdetails.name && this.burgerdetails.email && this.burgerdetails.chosenburger && this.x && this.y) {
+        return true;
+      }
+
+      this.errors = [];
+
+      if (!this.burgerdetails.name) {
+        this.errors.push('Name required.');
+      }
+      if (!this.burgerdetails.email) {
+        this.errors.push('Email required.');
+      }
+      if (!this.burgerdetails.chosenburger) {
+        this.errors.push('Please choose a burger.');
+      }
+      if (!(this.x &&this.y)) {
+        this.errors.push('Please choose a location.');
+      }
+
+      e.preventDefault();
+    }
   }
 });
